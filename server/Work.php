@@ -1,5 +1,5 @@
 <?php
-require_once('../lib//DataModel.php');
+require_once('../lib/DataModel.php');
 $params = array(
 	'baseTable' => 'tasks',
 	'pk_col' => 'taskID',

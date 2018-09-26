@@ -2,9 +2,9 @@
 class Quote {
 	public function getQuote() {
 		$quote = '';
-		$ini_file = '../lib/server.ini';
+		$ini_file = 'lib/server.ini';
 		if(!file_exists($ini_file)){
-			$quote = 'The ini is file not found.';
+			$quote = 'The ini file was not found.';
 			return $quote;
 		}
 		$server_array = parse_ini_file($ini_file,true);
