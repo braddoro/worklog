@@ -2,7 +2,7 @@
 class Quote {
 	public function getQuote() {
 		$quote = '';
-		$ini_file = 'lib/server.ini';
+		$ini_file = '../lib/server.ini';
 		if(!file_exists($ini_file)){
 			$quote = 'The ini file was not found.';
 			return $quote;

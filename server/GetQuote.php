@@ -4,7 +4,7 @@ class Quote {
 		$quote = '';
 		$ini_file = 'lib/server.ini';
 		if(!file_exists($ini_file)){
-			$quote = 'The ini file was not found.';
+			$quote = 'The ini file was not found 1.';
 			return $quote;
 		}
 		$server_array = parse_ini_file($ini_file,true);
