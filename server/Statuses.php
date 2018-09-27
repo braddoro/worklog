@@ -22,9 +22,7 @@ case 'fetch':
 	}else{
 		$active = 'null';
 	}
-	$argsIN['sql'] = "select * from statuses where
-		statusID = coalesce(:id, statusID)
-		and active = coalesce({$active}, active);";
+	$argsIN['sql'] = "select * from statuses where statusID = coalesce(:id, statusID) and active = coalesce({$active}, active);";
 	$response = $lclass->pdoFetch($argsIN);
 	break;
 case 'add':

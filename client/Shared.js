@@ -51,6 +51,7 @@ isc.Shared = {
 			{name: "projectID", type: "sequence", primaryKey: true, detail: true, canEdit: false, width: 75},
 			{name: "projectName", type: "text"},
 			{name: "projectCode", type: "text"},
+			{name: "ticketCode", type: "text", detail: true},
 			{name: "active", type: "text", width: 100, editorType: "selectItem", defaultValue: "Y", valueMap: {"Y": "Yes", "N": "No"}, width: 80},
 			{name: "lastChangeDate", width: 120, canEdit: false, detail: true}
 		]

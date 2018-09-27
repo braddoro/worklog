@@ -21,7 +21,7 @@ isc.defineClass("Reports", "myWindow").addProperties({
 		this.addItem(isc.myVLayout.create({members: [this.ReportsDF, this.ReportsBT]}));
 	},
 	submitData: function(){
-		var baseurl = "http://untrust3d.com/work/shell/app/reports/Status.php";
+		var baseurl = "http://localhost/localweb/worklog/reports/Status.php";
 		var fd = this.ReportsDF.getValues();
 
 		var sd = fd["START_DATE"].getFullYear() + "-";
@@ -51,6 +51,8 @@ isc.defineClass("Reports", "myWindow").addProperties({
 		ed += temp;
 
 		var paneurl = baseurl + "?u=" + isc.userData.userID + "&s=" + sd + "&e=" + ed;
+		console.log(baseurl);
+		console.log(paneurl);
 		isc.htmlViewer.create({width: 1000, height: 600, top: 0, left: 150, title: "Status Report", paneURL: paneurl});
 	},
 	submitData_callback: function(rpcResponse){
