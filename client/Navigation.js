@@ -27,7 +27,6 @@ isc.defineClass("Navigation", "Menu").addProperties({
 				{title: "Task History", click: "isc.Tasks.create({width: 1000, height: 600,  top: 5, left: 200, currUserID: isc.userData.userID})"},
 				{isSeparator: true},
 				{title: "Quotes", click: "isc.Quotes.create()"},
-				{title: "User Stories", click: "isc.UserStories.create({width: 1200, height: 600, top: 20, left: 5})"},
 				{title: "Brew Log", click: "isc.BrewLog.create({width: \"95%\", height: \"50%\"})"},
 				{isSeparator: true},
 				{title: "Reports", submenu: this.reportMenu},

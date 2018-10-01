@@ -58,7 +58,6 @@ $classes[] = "Statuses.js";
 $classes[] = "Tasks.js";
 $classes[] = "Threads.js";
 $classes[] = "Users.js";
-$classes[] = "UserStories.js";
 $classes[] = "Work.js";
 $content = "";
 foreach($classes as $class) {
