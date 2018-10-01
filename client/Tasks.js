@@ -4,8 +4,8 @@ isc.defineClass("Tasks", "myWindow").addProperties({
 	initWidget: function(initData){
 		this.Super("initWidget", arguments);
 		this.TasksDS = isc.myDataSource.create({
-			parent: this,
 			dataURL: serverPath + "Tasks.php",
+			parent: this,
 			fields:[
 				{name: "taskID",
 					primaryKey: true,
@@ -50,7 +50,7 @@ isc.defineClass("Tasks", "myWindow").addProperties({
 				{name: "projectID",
 					type: "integer",
 					optionDataSource: isc.Shared.projectsDS,
-					optionCriteria: {active: "Y"},
+					// optionCriteria: {active: "Y"},
 					displayField: "projectName",
 					valueField: "projectID",
 					fetchMissingValues: true,

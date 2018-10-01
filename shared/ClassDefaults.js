@@ -26,9 +26,9 @@ isc.defineClass("myVLayout", "VLayout").addProperties({
 });
 
 isc.defineClass("myDataSource", "DataSource").addProperties({
-	dataProtocol: "postParams",
-	dataFormat: "json",
 	autoFetchData: true,
+	dataFormat: "json",
+	dataProtocol: "postParams",
 	showPrompt: true,
 	transformRequest: function(dsRequest){
 		var superClassArguments = this.Super("transformRequest", dsRequest);
@@ -85,10 +85,10 @@ isc.defineClass("myDataSource", "DataSource").addProperties({
 
 isc.defineClass("myListGrid2", "ListGrid").addProperties({
 	alternateRecordStyles: true,
-	leaveScrollbarGap: false,
-	showFilterEditor: true,
 	autoFetchData: true,
+	leaveScrollbarGap: false,
 	modalEditing: true,
+	showFilterEditor: true,
 	rowContextClick: function(record, rowNum, colNum){
 		this.parent.localContextMenu.showContextMenu();
 		return false;
