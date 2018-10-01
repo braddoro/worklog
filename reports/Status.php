@@ -37,7 +37,7 @@ $params['ini_file'] = '../lib/server.ini';
 
 $params['bind'] = array('userid' => $userid, 'startdate' => $startdate, 'enddate' => $enddate);
 $lclass = New Reporter();
-$params['title'] = 'Total';
+$params['title'] = 'Total Work';
 $params['tooltip'] = 'Total';
 $params['sql'] = '
 	select
@@ -81,6 +81,50 @@ $params['title'] = 'Work by Project';
 $params['sql'] = '
 	select
 		P.projectCode,
+		sum(T.duration) as Hours,
+		CONCAT(round(round(sum(T.duration)/ ' . $total . ',3)*100,1), \'%\') Percent
+	from tasks T
+		inner join projects P on T.projectID = P.projectID
+	where
+		userID = :userid
+		and T.taskDate between :startdate and :enddate
+	group by
+		P.projectCode
+	order by
+		P.projectCode
+	;';
+$html .= $lclass->init($params);
+
+$params['title'] = 'Work by Project and Category';
+$params['sql'] = '
+	select
+		P.projectCode,
+		P.projectName,
+		C.categoryName,
+		sum(T.duration) Hours,
+		CONCAT(round(round(sum(T.duration)/ ' . $total . ',3)*100,1), \'%\') Percent
+	from tasks T
+		inner join projects P on T.projectID = P.projectID
+		inner join categories C on T.taskCategoryID = C.categoryID
+	where
+		userID = :userid
+		and T.taskDate between :startdate and :enddate
+	group by
+		P.projectCode,
+		P.projectName,
+		C.categoryName
+	order by
+		P.projectCode,
+		P.projectName,
+		C.categoryName;';
+$html .= $lclass->init($params);
+
+$params['bind'] = array('userid' => $userid, 'startdate' => $startdate, 'enddate' => $enddate);
+$lclass = New Reporter();
+$params['title'] = 'Work by Project and Name';
+$params['sql'] = '
+	select
+		P.projectCode,
 		P.projectName,
 		sum(T.duration) as Hours,
 		CONCAT(round(round(sum(T.duration)/ ' . $total . ',3)*100,1), \'%\') Percent
@@ -98,7 +142,7 @@ $params['sql'] = '
 $html .= $lclass->init($params);
 
 $lclass = New Reporter();
-$params['title'] = 'Working Behavior';
+$params['title'] = 'Work Tasks';
 $params['sql'] = '
 	select
 		C.categoryName,
@@ -182,30 +226,6 @@ $params['sql'] = '
 		C.categoryName,
 		P.projectCode,
 		P.projectName;';
-$html .= $lclass->init($params);
-
-$params['title'] = 'Tasks by Project and Category';
-$params['sql'] = '
-	select
-		P.projectCode,
-		P.projectName,
-		C.categoryName,
-		sum(T.duration) Hours,
-		CONCAT(round(round(sum(T.duration)/ ' . $total . ',3)*100,1), \'%\') Percent
-	from tasks T
-		inner join projects P on T.projectID = P.projectID
-		inner join categories C on T.taskCategoryID = C.categoryID
-	where
-		userID = :userid
-		and T.taskDate between :startdate and :enddate
-	group by
-		P.projectCode,
-		P.projectName,
-		C.categoryName
-	order by
-		P.projectCode,
-		P.projectName,
-		C.categoryName;';
 $html .= $lclass->init($params);
 
 $lclass = New Reporter();

@@ -7,6 +7,12 @@ isc.defineClass("Work", "myWindow").addProperties({
 		this.WorkDS = isc.myDataSource.create({
 			dataURL: serverPath + "Work.php",
 			fields:[
+				{name: "taskID",
+					primaryKey: true,
+					type: "sequence",
+					canEdit: false,
+					visible: false
+				},
 				{name: "taskDate",
 					title: "Date",
 					editorType: "DateItem",
@@ -62,7 +68,12 @@ isc.defineClass("Work", "myWindow").addProperties({
 		this.TasksDS = isc.myDataSource.create({
 			dataURL: serverPath + "Work.php",
 			fields:[
-				{name: "taskID", detail: true},
+				{name: "taskID",
+					primaryKey: true,
+					type: "sequence",
+					canEdit: false,
+					detail: true
+				},
 				{name: "duration", type: "float", title: "Time", width: 50},
 				{name: "taskCategoryID",
 					title: "Category",

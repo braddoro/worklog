@@ -53,7 +53,6 @@ case 'fetch':
 		and t.taskDate = coalesce('$taskDate', t.taskDate)
 		and t.projectID = coalesce($projectID, t.projectID)
 		and t.taskCategoryID = coalesce($taskCategoryID, t.taskCategoryID)";
-	// echo($argsIN['sql']);
 	$response = $lclass->pdoFetch($argsIN);
 	break;
 case 'add':
