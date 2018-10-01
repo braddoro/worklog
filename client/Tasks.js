@@ -63,7 +63,7 @@ isc.defineClass("Tasks", "myWindow").addProperties({
 					title: "Project",
 					type: "integer",
 					valueField: "projectID",
-					width: 150
+					width: 120
 				},
 				{name: "ticketKey",
 					title: "Ticket",

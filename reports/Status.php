@@ -52,29 +52,6 @@ $html .= $lclass->init($params);
 
 $total = get_string_between($html,'<td>','</td>');
 
-// $params['bind'] = array('userid' => $userid);
-// $lclass = New Reporter();
-// $params['title'] = 'Open Tasks';
-// $params['tooltip'] = 'Tasks that I am currently working on.';
-// $params['sql'] = '
-// 	select
-// 		P.projectCode,
-// 		P.projectName,
-// 		S.status,
-// 		I.ticketKey,
-// 		I.itemDate,
-// 		I.item
-// 	from Items I
-// 	left join projects P
-// 		on I.projectID = P.projectID
-// 	left join statuses S
-// 		on I.statusID = S.statusID
-// 	where
-// 		I.userID = :userid
-// 	order by
-// 		I.dueDate;';
-// $html .= $lclass->init($params);
-
 $params['bind'] = array('userid' => $userid, 'startdate' => $startdate, 'enddate' => $enddate);
 $lclass = New Reporter();
 $params['title'] = 'Work by Project';
@@ -93,6 +70,28 @@ $params['sql'] = '
 	order by
 		P.projectCode
 	;';
+$html .= $lclass->init($params);
+
+$params['bind'] = array('userid' => $userid, 'startdate' => $startdate, 'enddate' => $enddate);
+$lclass = New Reporter();
+$params['title'] = 'Work by Project and Name';
+$params['sql'] = '
+	select
+		P.projectCode,
+		P.projectName,
+		sum(T.duration) as Hours,
+		CONCAT(round(round(sum(T.duration)/ ' . $total . ',3)*100,1), \'%\') Percent
+	from tasks T
+		inner join projects P on T.projectID = P.projectID
+	where
+		userID = :userid
+		and T.taskDate between :startdate and :enddate
+	group by
+		P.projectCode,
+		P.projectName
+	order by
+		P.projectCode,
+		P.projectName;';
 $html .= $lclass->init($params);
 
 $params['title'] = 'Work by Project and Category';
@@ -119,46 +118,6 @@ $params['sql'] = '
 		C.categoryName;';
 $html .= $lclass->init($params);
 
-$params['bind'] = array('userid' => $userid, 'startdate' => $startdate, 'enddate' => $enddate);
-$lclass = New Reporter();
-$params['title'] = 'Work by Project and Name';
-$params['sql'] = '
-	select
-		P.projectCode,
-		P.projectName,
-		sum(T.duration) as Hours,
-		CONCAT(round(round(sum(T.duration)/ ' . $total . ',3)*100,1), \'%\') Percent
-	from tasks T
-		inner join projects P on T.projectID = P.projectID
-	where
-		userID = :userid
-		and T.taskDate between :startdate and :enddate
-	group by
-		P.projectCode,
-		P.projectName
-	order by
-		P.projectCode,
-		P.projectName;';
-$html .= $lclass->init($params);
-
-$lclass = New Reporter();
-$params['title'] = 'Work Tasks';
-$params['sql'] = '
-	select
-		C.categoryName,
-		sum(T.duration) as Hours,
-		CONCAT(round(round(sum(T.duration)/ ' . $total . ',3)*100,1), \'%\') Percent
-	from tasks T
-		inner join categories C on T.taskCategoryID = C.categoryID
-	where
-		userID = :userid
-		and T.taskDate between :startdate and :enddate
-	group by
-		C.categoryName
-	order by
-		C.categoryName;';
-$html .= $lclass->init($params);
-
 $lclass = New Reporter();
 $params['title'] = 'Administration Work Breakdown';
 $params['sql'] = '
@@ -182,6 +141,24 @@ order by
 	P.projectCode,
 	P.projectName,
 	CONCAT(IFNULL(T.ticketKey,\'\'), \' \', IFNULL(T.description,\'\'));';
+$html .= $lclass->init($params);
+
+$lclass = New Reporter();
+$params['title'] = 'Work Tasks';
+$params['sql'] = '
+	select
+		C.categoryName,
+		sum(T.duration) as Hours,
+		CONCAT(round(round(sum(T.duration)/ ' . $total . ',3)*100,1), \'%\') Percent
+	from tasks T
+		inner join categories C on T.taskCategoryID = C.categoryID
+	where
+		userID = :userid
+		and T.taskDate between :startdate and :enddate
+	group by
+		C.categoryName
+	order by
+		C.categoryName;';
 $html .= $lclass->init($params);
 
 $html .= '<hr><br/>';

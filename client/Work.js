@@ -8,55 +8,55 @@ isc.defineClass("Work", "myWindow").addProperties({
 			dataURL: serverPath + "Work.php",
 			fields:[
 				{name: "taskID",
+					canEdit: false,
 					primaryKey: true,
 					type: "sequence",
-					canEdit: false,
 					visible: false
 				},
 				{name: "taskDate",
-					title: "Date",
 					editorType: "DateItem",
+					title: "Date",
 					validators: [{type: "isDate"}],
 					width: 120,
-					changed: function(form, item, value){
-						form.parent.TasksLG.fetchData();
-					}
+					changed: function(form, item, value){form.parent.TasksLG.fetchData();}
 				},
 				{name: "userID",
-					type: "text",
-					optionDataSource: isc.Shared.usersDS,
-					optionCriteria: {active: "Y"},
+					defaultValue: isc.userData.userID,
 					displayField: "userName",
-					valueField: "userID",
 					fetchMissingValues: true,
-					required: true,
-					width: 150,
 					includeInRecordSummary: false,
-					defaultValue: isc.userData.userID
+					optionCriteria: {active: "Y"},
+					optionDataSource: isc.Shared.usersDS,
+					required: true,
+					title: "User",
+					type: "text",
+					valueField: "userID",
+					width: 150
 				},
 				{name: "taskCategoryID",
-					type: "integer",
-					showGridSummary: false,
-					optionDataSource: isc.Shared.categoriesDS,
-					optionCriteria: {active: "Y"},
 					displayField: "categoryName",
-					valueField: "categoryID",
 					fetchMissingValues: true,
-					title: "Category ID",
+					optionCriteria: {active: "Y"},
+					optionDataSource: isc.Shared.categoriesDS,
 					required: true,
+					showGridSummary: false,
+					title: "Category",
+					type: "integer",
+					valueField: "categoryID",
 					width: 120
 				},
 				{name: "projectID",
-					type: "integer",
-					optionDataSource: isc.Shared.projectsDS,
-					optionCriteria: {active: "Y"},
 					displayField: "projectName",
-					valueField: "projectID",
 					fetchMissingValues: true,
-					required: true,
-					pickListWidth: 250,
-					pickListProperties: {showFilterEditor: true},
+					optionCriteria: {active: "Y"},
+					optionDataSource: isc.Shared.projectsDS,
 					pickListFields: [{name: "projectCode", width: 75}, {name: "projectName", width: "*"}],
+					pickListProperties: {showFilterEditor: true},
+					pickListWidth: 250,
+					required: true,
+					title: "Project",
+					type: "integer",
+					valueField: "projectID",
 					width: 150
 				},
 				{name: "duration",  type: "float", required: true, width: 75, defaultValue: 1},
@@ -69,44 +69,44 @@ isc.defineClass("Work", "myWindow").addProperties({
 			dataURL: serverPath + "Work.php",
 			fields:[
 				{name: "taskID",
-					primaryKey: true,
-					type: "sequence",
 					canEdit: false,
-					detail: true
+					detail: true,
+					primaryKey: true,
+					type: "sequence"
 				},
-				{name: "duration", type: "float", title: "Time", width: 50},
+				{name: "duration",
+					title: "Time",
+					type: "float",
+					width: 50
+				},
 				{name: "taskCategoryID",
-					title: "Category",
-					optionDataSource: isc.Shared.categoriesDS,
-					optionCriteria: {active: "Y"},
 					displayField: "categoryName",
-					valueField: "categoryID",
 					fetchMissingValues: true,
-					width: 60
+					optionCriteria: {active: "Y"},
+					optionDataSource: isc.Shared.categoriesDS,
+					title: "Category",
+					valueField: "categoryID",
+					width: 100
 				},
 				{name: "projectID",
-					type: "integer",
-					optionDataSource: isc.Shared.projectsDS,
-					optionCriteria: {active: "Y"},
 					displayField: "projectName",
-					valueField: "projectID",
 					fetchMissingValues: true,
+					optionCriteria: {active: "Y"},
+					optionDataSource: isc.Shared.projectsDS,
+					pickListFields: [{name: "projectCode", width: 75},{name: "projectName", width: "*"}],
+					pickListProperties: {showFilterEditor: true},
+					pickListWidth: 200,
 					required: true,
 					showGridSummary: false,
-					pickListWidth: 200,
-					pickListProperties: {
-						showFilterEditor: true
-					},
-					pickListFields: [
-						{name: "projectCode", width: 75},
-						{name: "projectName", width: "*"}
-					],
+					title: "Project",
+					type: "integer",
+					valueField: "projectID",
 					width: "*"
 				},
 				{name: "ticketKey",
 					title: "Ticket",
-					width: 70,
 					type: "text",
+					width: 70,
 					formatCellValue: function (value) {
 						var formatted;
 						if (value) {
@@ -115,7 +115,10 @@ isc.defineClass("Work", "myWindow").addProperties({
 						return formatted;
 					}
 				},
-				{name: "description", type: "text", width: 100, detail: true}
+				{name: "description",
+					type: "text",
+					width: 200
+				}
 			]
 		});
 		this.WorkDF = isc.myDynamicForm.create({

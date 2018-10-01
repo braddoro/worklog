@@ -21,7 +21,7 @@ isc.defineClass("Navigation", "Menu").addProperties({
 			title: "...",
 			showShadow: true,
 			items: [
-				{title: "Log Work", click: "isc.Work.create({width: 350, height: 600, top: 25, left: 5})"},
+				{title: "Log Work", click: "isc.Work.create({width: 600, height: 600, top: 25, left: 5})"},
 				{title: "To Do Items", click: "isc.Items.create({width: 800, height: 350, top: 1, left: 360})"},
 				{title: "Task History", click: "isc.Tasks.create({width: 800, height: 600,  top: 5, left: 200, currUserID: isc.userData.userID})"},
 				{isSeparator: true},
