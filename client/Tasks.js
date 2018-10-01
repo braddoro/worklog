@@ -1,5 +1,5 @@
 isc.defineClass("Tasks", "myWindow").addProperties({
-	title: "Task List",
+	title: "Work History",
 	currUserID: 0,
 	initWidget: function(initData){
 		this.Super("initWidget", arguments);
@@ -8,33 +8,35 @@ isc.defineClass("Tasks", "myWindow").addProperties({
 			parent: this,
 			fields:[
 				{name: "taskID",
-					primaryKey: true,
-					type: "sequence",
 					canEdit: false,
-					detail: true
+					detail: true,
+					primaryKey: true,
+					type: "sequence"
 				},
 				{name: "taskDate",
-					title: "Date",
 					editorType: "DateItem",
+					title: "Date",
 					validators: [{type: "isDate"}],
 					width: 120
 				},
 				{name: "userID",
-					type: "text",
-					optionDataSource: isc.Shared.usersDS,
-					optionCriteria: {active: "Y"},
+					defaultValue: isc.userData.userID,
 					displayField: "userName",
-					valueField: "userID",
 					fetchMissingValues: true,
-					required: true,
-					width: 150,
 					includeInRecordSummary: false,
-					defaultValue: isc.userData.userID
+					optionCriteria: {active: "Y"},
+					optionDataSource: isc.Shared.usersDS,
+					required: true,
+					title: "User",
+					type: "text",
+					valueField: "userID",
+					width: 100
 				},
 				{name: "duration",
 					type: "float",
 					required: true,
-					width: 75
+					title: "Time",
+					width: 50
 				},
 				{name: "taskCategoryID",
 					type: "integer",
@@ -45,31 +47,28 @@ isc.defineClass("Tasks", "myWindow").addProperties({
 					valueField: "categoryID",
 					fetchMissingValues: true,
 					required: true,
-					width: 120
+					title: "Category",
+					width: 100
 				},
 				{name: "projectID",
-					type: "integer",
-					optionDataSource: isc.Shared.projectsDS,
-					// optionCriteria: {active: "Y"},
 					displayField: "projectName",
-					valueField: "projectID",
 					fetchMissingValues: true,
+					// optionCriteria: {active: "Y"},
+					optionDataSource: isc.Shared.projectsDS,
+					pickListFields: [{name: "projectCode", width: 75},{name: "projectName", width: "*"}],
+					pickListProperties: {showFilterEditor: true},
+					pickListWidth: 250,
 					required: true,
 					showGridSummary: false,
-					pickListWidth: 250,
-					pickListProperties: {
-						showFilterEditor: true
-					},
-					pickListFields: [
-						{name: "projectCode", width: 75},
-						{name: "projectName", width: "*"}
-					],
+					title: "Project",
+					type: "integer",
+					valueField: "projectID",
 					width: 150
 				},
 				{name: "ticketKey",
 					title: "Ticket",
-					width: 70,
 					type: "text",
+					width: 80,
 					formatCellValue: function (value) {
 						var formatted;
 						if (value) {
@@ -90,7 +89,7 @@ isc.defineClass("Tasks", "myWindow").addProperties({
 		});
 		this.TasksLG = isc.myListGrid2.create({
 			parent: this,
-			name: "Tasks",
+			name: "Work History",
 			dataSource: this.TasksDS,
 			showGridSummary: true,
 			rowDoubleClick: function(record, recordNum, fieldNum, keyboardGenerated) {
