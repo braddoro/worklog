@@ -86,7 +86,7 @@ isc.defineClass("Work", "myWindow").addProperties({
 					optionDataSource: isc.Shared.categoriesDS,
 					title: "Category",
 					valueField: "categoryID",
-					width: 100
+					width: 80
 				},
 				{name: "projectID",
 					displayField: "projectName",
@@ -101,7 +101,7 @@ isc.defineClass("Work", "myWindow").addProperties({
 					title: "Project",
 					type: "integer",
 					valueField: "projectID",
-					width: "*"
+					width: 160
 				},
 				{name: "ticketKey",
 					title: "Ticket",
@@ -117,7 +117,7 @@ isc.defineClass("Work", "myWindow").addProperties({
 				},
 				{name: "description",
 					type: "text",
-					width: 200
+					width: "*"
 				}
 			]
 		});
