@@ -42,11 +42,13 @@ echo $content;
 // Application files.
 $classes = array();
 $classes[] = "BrewLog.js";
+$classes[] = "Cards.js";
 $classes[] = "Categories.js";
 $classes[] = "ContextMenu.js";
 $classes[] = "Desktop.js";
 $classes[] = "HtmlViewer.js";
 $classes[] = "Items.js";
+$classes[] = "Lists.js";
 $classes[] = "Login.js";
 $classes[] = "Navigation.js";
 $classes[] = "Projects.js";

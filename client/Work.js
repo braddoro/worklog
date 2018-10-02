@@ -1,5 +1,5 @@
 isc.defineClass("Work", "myWindow").addProperties({
-	title: "Work",
+	title: "Daily Work",
 	left: isc.Math.random(150),
 	top: isc.Math.random(150),
 	initWidget: function(initData){
@@ -133,7 +133,7 @@ isc.defineClass("Work", "myWindow").addProperties({
 		});
 		this.TasksLG = isc.myListGrid2.create({
 			parent: this,
-			name: "Work",
+			name: "Daily Work",
 			dataSource: this.TasksDS,
 			showFilterEditor: false,
 			showGridSummary: true,
