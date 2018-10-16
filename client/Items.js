@@ -33,6 +33,7 @@ isc.defineClass("Items", "myWindow").addProperties({
 					width: 150
 				},
 				{name: "statusID", type: "integer", optionDataSource: isc.Shared.statusDS, displayField: "status", valueField: "statusID", fetchMissingValues: true, required: true},
+				{name: "current", type: "text", width: 80, editorType: "checkbox"},
 				{name: "ticketKey",
 					title: "Ticket",
 					width: 70,
@@ -45,8 +46,6 @@ isc.defineClass("Items", "myWindow").addProperties({
 						return formatted;
 					}
 				},
-				{name: "type", type: "text", detail: true},
-				{name: "action", type: "text", detail: true},
 				{name: "itemDate", width: 120, editorType: "DateItem", inputFormat: "toUSShortDate", displayFormat: "toSerializeableDate", useTextField: true},
 				{name: "item", type: "text", width: "*"},
 				{name: "lastChangeDate", canEdit: false, detail: true}

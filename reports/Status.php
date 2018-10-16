@@ -35,6 +35,8 @@ if(isset($argsIN['e'])){
 $html = '<div class="title">Status Report '. "from $startdate to $enddate" . '</div><br/>' . PHP_EOL;
 $params['ini_file'] = '../lib/server.ini';
 
+// Total Work
+//
 $params['bind'] = array('userid' => $userid, 'startdate' => $startdate, 'enddate' => $enddate);
 $lclass = New Reporter();
 $params['title'] = 'Total Work';
@@ -52,9 +54,11 @@ $html .= $lclass->init($params);
 
 $total = get_string_between($html,'<td>','</td>');
 
+// Work by Project Code
+//
 $params['bind'] = array('userid' => $userid, 'startdate' => $startdate, 'enddate' => $enddate);
 $lclass = New Reporter();
-$params['title'] = 'Work by Project';
+$params['title'] = 'Work by Project Code';
 $params['sql'] = '
 	select
 		P.projectCode,
@@ -72,9 +76,11 @@ $params['sql'] = '
 	;';
 $html .= $lclass->init($params);
 
+// Work by Project Code and Name
+//
 $params['bind'] = array('userid' => $userid, 'startdate' => $startdate, 'enddate' => $enddate);
 $lclass = New Reporter();
-$params['title'] = 'Work by Project and Name';
+$params['title'] = 'Work by Project Code and Name';
 $params['sql'] = '
 	select
 		P.projectCode,
@@ -94,6 +100,8 @@ $params['sql'] = '
 		P.projectName;';
 $html .= $lclass->init($params);
 
+// Work by Project and Category
+//
 $params['title'] = 'Work by Project and Category';
 $params['sql'] = '
 	select
@@ -118,6 +126,8 @@ $params['sql'] = '
 		C.categoryName;';
 $html .= $lclass->init($params);
 
+// Administration Work Breakdown
+//
 $lclass = New Reporter();
 $params['title'] = 'Administration Work Breakdown';
 $params['sql'] = '
@@ -132,7 +142,7 @@ from tasks T
 where
 	userID = :userid
 	and T.taskDate between :startdate and :enddate
-	and P.projectCode = \'2018-1234\'
+	and P.projectCode = \'0000-0008\'
 group by
 	P.projectCode,
 	P.projectName,
@@ -143,6 +153,8 @@ order by
 	CONCAT(IFNULL(T.ticketKey,\'\'), \' \', IFNULL(T.description,\'\'));';
 $html .= $lclass->init($params);
 
+// Work Tasks
+//
 $lclass = New Reporter();
 $params['title'] = 'Work Tasks';
 $params['sql'] = '
@@ -163,6 +175,8 @@ $html .= $lclass->init($params);
 
 $html .= '<hr><br/>';
 
+// Daily
+//
 $params['title'] = 'Daily';
 $params['tooltip'] = 'Hours Worked by Day';
 $params['sql'] = '
@@ -180,6 +194,8 @@ $params['sql'] = '
 			T.taskDate;';
 $html .= $lclass->init($params);
 
+// Tasks by Category and Project
+//
 $lclass = New Reporter();
 $params['title'] = 'Tasks by Category and Project';
 $params['sql'] = '
@@ -205,6 +221,8 @@ $params['sql'] = '
 		P.projectName;';
 $html .= $lclass->init($params);
 
+// Tasks Detail
+//
 $lclass = New Reporter();
 $params['title'] = 'Tasks Detail';
 $params['sql'] = '
