@@ -17,8 +17,10 @@ isc.defineClass("Items", "myWindow").addProperties({
 					fetchMissingValues: true,
 					required: true,
 					width: 100,
-					defaultValue: isc.userData.userID
+					defaultValue: isc.userData.userID,
+					detail: true
 				},
+				{name: "rank", type: "integer", width: 80, editorType: "spinner", defaultValue: 0},
 				{name: "projectID",
 					type: "integer",
 					optionDataSource: isc.Shared.projectsDS,
@@ -32,8 +34,7 @@ isc.defineClass("Items", "myWindow").addProperties({
 					pickListFields: [{name: "projectCode", width: 75}, {name: "projectName", width: "*"}],
 					width: 150
 				},
-				{name: "statusID", type: "integer", optionDataSource: isc.Shared.statusDS, displayField: "status", valueField: "statusID", fetchMissingValues: true, required: true},
-				{name: "current", type: "text", width: 80, editorType: "checkbox"},
+				{name: "statusID", type: "integer", optionDataSource: isc.Shared.statusDS, displayField: "status", valueField: "statusID", fetchMissingValues: true, required: true, width: 120},
 				{name: "ticketKey",
 					title: "Ticket",
 					width: 70,
@@ -46,7 +47,7 @@ isc.defineClass("Items", "myWindow").addProperties({
 						return formatted;
 					}
 				},
-				{name: "itemDate", width: 120, editorType: "DateItem", inputFormat: "toUSShortDate", displayFormat: "toSerializeableDate", useTextField: true},
+				{name: "itemDate", editorType: "DateItem", inputFormat: "toUSShortDate", displayFormat: "toSerializeableDate", useTextField: true, width: 100},
 				{name: "item", type: "text", width: "*"},
 				{name: "lastChangeDate", canEdit: false, detail: true}
 			]
@@ -56,6 +57,7 @@ isc.defineClass("Items", "myWindow").addProperties({
 			name: "Items",
 			dataSource: this.ItemsDS,
 			showRowNumbers: true,
+			initialSort: [{property: "rank", direction: "ascending"},{property: "ticketKey", direction: "ascending"}],
 			rowContextClick: function(record, rowNum, colNum){
 				this.parent.localContextMenu.showContextMenu();
 				var now = new Date();
