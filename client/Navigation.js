@@ -15,8 +15,9 @@ isc.defineClass("Navigation", "Menu").addProperties({
 			title: "Task Entry",
 			items: [
 				{title: "Reports", click: "isc.Reports.create();"},
-				{title: "Open Tasks", click: "isc.htmlViewer.create({width: 800, height: 350, title: \"Open Tasks\", paneURL: \"http://untrust3d.com/work/shell/app/reports/Tasks.php?u=\" + isc.userData.userID})"},
-				{title: "Status", click: "isc.htmlViewer.create({width: 1000, height: 600, top: 0, left: 150, title: \"Status Report\", paneURL: \"http://untrust3d.com/work/shell/app/reports/Status.php?u=\" + isc.userData.userID + \"&s=2018-04-16&e=2018-04-20\"})"}
+				{title: "Project History", click: "isc.htmlViewer.create({width: 800, height: 350, title: \"Open Tasks\", paneURL: \"http://localhost/localweb/worklog/reports//ProjectHistory.php?u=\" + isc.userData.userID})"},
+				// {title: "Open Tasks", click: "isc.htmlViewer.create({width: 800, height: 350, title: \"Open Tasks\", paneURL: \"http://untrust3d.com/work/shell/app/reports/Tasks.php?u=\" + isc.userData.userID})"},
+				// {title: "Status", click: "isc.htmlViewer.create({width: 1000, height: 600, top: 0, left: 150, title: \"Status Report\", paneURL: \"http://untrust3d.com/work/shell/app/reports/Status.php?u=\" + isc.userData.userID + \"&s=2018-04-16&e=2018-04-20\"})"}
 			]
 		});
 		this.mainMenu = isc.myMenu.create({
