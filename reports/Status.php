@@ -82,6 +82,7 @@ $params['title'] = 'Work by Project Code';
 $params['sql'] = '
 	select
 		P.projectCode,
+		P.ticketCode,
 		sum(T.duration) as Hours,
 		CONCAT(round(round(sum(T.duration)/ ' . $total . ',3)*100,1), \'%\') Percent
 	from tasks T
@@ -90,7 +91,8 @@ $params['sql'] = '
 		userID = :userid
 		and T.taskDate between :startdate and :enddate
 	group by
-		P.projectCode
+		P.projectCode,
+		P.ticketCode
 	order by
 		P.projectCode
 	;';
@@ -105,6 +107,7 @@ $params['sql'] = '
 	select
 		P.projectCode,
 		P.projectName,
+		P.ticketCode,
 		sum(T.duration) as Hours,
 		CONCAT(round(round(sum(T.duration)/ ' . $total . ',3)*100,1), \'%\') Percent
 	from tasks T
@@ -114,7 +117,8 @@ $params['sql'] = '
 		and T.taskDate between :startdate and :enddate
 	group by
 		P.projectCode,
-		P.projectName
+		P.projectName,
+		P.ticketCode
 	order by
 		P.projectCode,
 		P.projectName;';
@@ -127,6 +131,7 @@ $params['sql'] = '
 	select
 		P.projectCode,
 		P.projectName,
+		P.ticketCode,
 		C.categoryName,
 		sum(T.duration) Hours,
 		CONCAT(round(round(sum(T.duration)/ ' . $total . ',3)*100,1), \'%\') Percent
@@ -139,10 +144,12 @@ $params['sql'] = '
 	group by
 		P.projectCode,
 		P.projectName,
+		P.ticketCode,
 		C.categoryName
 	order by
 		P.projectCode,
 		P.projectName,
+		P.ticketCode,
 		C.categoryName;';
 $html .= $lclass->init($params);
 
@@ -232,6 +239,7 @@ $params['sql'] = '
 		T.duration,
 		P.projectCode,
 		P.projectName,
+		P.ticketCode,
 		T.ticketKey,
 		T.description,
 		T.lastChangeDate

@@ -47,6 +47,7 @@ select
     month(T.taskDate) Month,
     week(T.taskDate) Week,
 	P.projectName,
+    P.ticketCode,
     sum(T.duration) Hours,
     min(T.taskDate) Start,
     max(T.taskDate) End
@@ -60,6 +61,7 @@ where
 	and year(T.taskDate) = :taskDate
 group by
 	P.projectName,
+    P.ticketCode,
     month(T.taskDate),
     week(T.taskDate)
 order by

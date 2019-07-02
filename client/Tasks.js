@@ -65,6 +65,19 @@ isc.defineClass("Tasks", "myWindow").addProperties({
 					valueField: "projectID",
 					width: 120
 				},
+				{name: "ticketCode",
+					title: "Project Ticket",
+					type: "text",
+					width: 70,
+					canEdit: false,
+					formatCellValue: function (value) {
+						var formatted;
+						if (value) {
+							formatted = "<a href='http://jira.prod.icd/browse/" + value + "' target='_blank'>" + value + "</a>";
+						}
+						return formatted;
+					}
+				},
 				{name: "ticketKey",
 					title: "Ticket",
 					type: "text",

@@ -47,6 +47,7 @@ case 'fetch':
 		*
 	from
 		tasks t
+		inner join projects p on t.projectID = p.projectID
 	where
 			t.taskID = coalesce(:id, t.taskID)
 		and t.userID = coalesce($userID, t.userID)
