@@ -47,6 +47,7 @@ $classes[] = "Categories.js";
 $classes[] = "ContextMenu.js";
 $classes[] = "Desktop.js";
 $classes[] = "HtmlViewer.js";
+$classes[] = "Entry.js";
 $classes[] = "Items.js";
 $classes[] = "Lists.js";
 $classes[] = "Login.js";

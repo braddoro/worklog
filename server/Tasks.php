@@ -17,6 +17,52 @@ $argsIN = array_merge($_POST,$_GET);
 $operationType = (isset($argsIN['operationType'])) ? $argsIN['operationType'] : null;
 switch($operationType){
 case 'fetch':
+	if(isset($argsIN['taskDate'])){
+		$start = $argsIN['taskDate'];
+	}else{
+		$start = 'NULL';
+	}
+	// if(isset($argsIN['e'])){
+	// 	$end = $argsIN['e'];
+	// }else{
+	// 	$end = 'NULL';
+	// }
+	if(isset($argsIN['taskID'])) {
+		$taskID = ($argsIN['taskID'] > 0) ? $argsIN['taskID'] : NULL;
+	}else{
+		$taskID = 'NULL';
+	}
+	if(isset($argsIN['userID'])) {
+		$userID = ($argsIN['userID'] > 0) ? $argsIN['userID'] : NULL;
+	}else{
+		$userID = 'NULL';
+	}
+	if(isset($argsIN['taskCategoryID'])) {
+		$taskCategoryID = ($argsIN['taskCategoryID'] > 0) ? $argsIN['taskCategoryID'] : NULL;
+	}else{
+		$taskCategoryID = 'NULL';
+	}
+	if(isset($argsIN['projectID'])) {
+		$projectID = ($argsIN['projectID'] > 0) ? $argsIN['projectID'] : NULL;
+	}else{
+		$projectID = 'NULL';
+	}
+// and t.taskDate <= coalesce('$end', t.taskDate)
+	$argsIN['sql'] = "
+	select
+		*
+	from
+		tasks t
+		inner join projects p on t.projectID = p.projectID
+	where
+			t.taskID = coalesce(:id, t.taskID)
+		and t.userID = coalesce($userID, t.userID)
+		and t.taskDate >= coalesce('$start', t.taskDate)
+		and t.projectID = coalesce($projectID, t.projectID)
+		and t.taskCategoryID = coalesce($taskCategoryID, t.taskCategoryID)";
+
+echo "/*" . $argsIN['sql'] . "*/";
+
 	$response = $lclass->pdoFetch($argsIN);
 	break;
 case 'add':

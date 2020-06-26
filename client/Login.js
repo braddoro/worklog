@@ -13,7 +13,7 @@ isc.defineClass("Login", "myWindow").addProperties({
 			dataURL: serverPath + "Login.php",
 			fields:[
 				{name: "USER_NAME", type: "text", width: 150},
-				{name: "PASSWORD", type: "text", width: 150}
+				{name: "PASSWORD", type: "password", width: 150}
 			]
 		});
 		this.LoginDF = isc.myDynamicForm.create({

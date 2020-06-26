@@ -96,6 +96,34 @@ $params['sql'] = '
 	order by
 		P.projectCode
 	;';
+// $html .= $lclass->init($params);
+
+// Support breakdown
+// Hardcoded to 72 for Product Support
+//
+$params['title'] = 'Support Breakdown';
+$params['sql'] = '
+select
+	P.projectCode,
+	P.projectName,
+    T.ticketKey,
+	sum(T.duration) Hours
+from tasks T
+	inner join projects P on T.projectID = P.projectID
+	inner join categories C on T.taskCategoryID = C.categoryID
+where
+	userID = :userid
+	and T.taskDate between :startdate and :enddate
+    and P.projectID = 72
+group by
+	P.projectCode,
+	P.projectName,
+    T.ticketKey
+order by
+	P.projectCode,
+	P.projectName,
+    T.ticketKey
+;';
 $html .= $lclass->init($params);
 
 // Work by Project Code and Name
@@ -123,6 +151,8 @@ $params['sql'] = '
 		P.projectCode,
 		P.projectName;';
 $html .= $lclass->init($params);
+
+$html .= '<hr><br/>';
 
 // Work by Project and Category
 //
@@ -178,9 +208,7 @@ order by
 	P.projectCode,
 	P.projectName,
 	CONCAT(IFNULL(T.ticketKey,\'\'), \' \', IFNULL(T.description,\'\'));';
-$html .= $lclass->init($params);
-
-$html .= '<hr><br/>';
+// $html .= $lclass->init($params);
 
 // Daily
 //

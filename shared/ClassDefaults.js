@@ -89,8 +89,19 @@ isc.defineClass("myListGrid2", "ListGrid").addProperties({
 	leaveScrollbarGap: false,
 	modalEditing: true,
 	showFilterEditor: true,
+	dataArrived: function(){
+		this.updateStatus();
+	},
+	doubleClick: function(){
+		if(this.getTotalRows() === 0){
+			this.startEditingNew();
+		}
+		return true;
+	},
 	rowContextClick: function(record, rowNum, colNum){
-		this.parent.localContextMenu.showContextMenu();
+		if(this.parent.localContextMenu){
+			this.parent.localContextMenu.showContextMenu();
+		}
 		return false;
 	},
 	rowDoubleClick: function(record, recordNum, fieldNum, keyboardGenerated) {
@@ -99,9 +110,6 @@ isc.defineClass("myListGrid2", "ListGrid").addProperties({
 	updateStatus: function() {
 		this.parent.setTitle(this.name + " : Rows - " + this.getTotalRows());
 		this.focus();
-	},
-	dataArrived: function(){
-		this.updateStatus();
 	}
 });
 
