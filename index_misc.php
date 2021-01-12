@@ -1,47 +1,48 @@
 <?php
+require_once '../adodb5/adodb.inc.php';
 // https://mattstauffer.co/blog/sublime-text-3-for-php-developers
 $ini_array  = parse_ini_file('misc.ini', true);
-$skin = $ini_array['application']['skin'];;
+$skin = $ini_array['application']['skin'];
 $title = $ini_array['application']['title'];
-$source_path = $ini_array['application']['source_path'];
-$smart_ver = $ini_array['application']['smartclient_version'];
+// $source_path = $ini_array['application']['source_path'];
 $client_path = $ini_array['application']['client_path'];
 $server_path = $ini_array['application']['server_path'];
-$shared_path = $ini_array['application']['shared_path'];
+// $shared_path = $ini_array['application']['shared_path'];
 echo "<html>
 <head>
 <script>var isc = null;</script>
-<script>var serverPath = '$server_path';</script>
-<script>var isomorphicDir = '{$source_path}{$smart_ver}/smartclientRuntime/isomorphic/';</script>
-<script src='{$source_path}{$smart_ver}/smartclientRuntime/isomorphic/system/modules/ISC_Core.js'></script>
-<script src='{$source_path}{$smart_ver}/smartclientRuntime/isomorphic/system/modules/ISC_Foundation.js'></script>
-<script src='{$source_path}{$smart_ver}/smartclientRuntime/isomorphic/system/modules/ISC_Containers.js'></script>
-<script src='{$source_path}{$smart_ver}/smartclientRuntime/isomorphic/system/modules/ISC_Grids.js'></script>
-<script src='{$source_path}{$smart_ver}/smartclientRuntime/isomorphic/system/modules/ISC_Forms.js'></script>
-<script src='{$source_path}{$smart_ver}/smartclientRuntime/isomorphic/system/modules/ISC_DataBinding.js'></script>
-<script src='{$source_path}{$smart_ver}/smartclientRuntime/isomorphic/skins/{$skin}/load_skin.js'></script>
+<script>var serverPath = '{$server_path}';</script>
+<script>var isomorphicDir = '../smartclientRuntime/isomorphic/';</script>
+<script src='../smartclientRuntime/isomorphic/system/modules/ISC_Core.js'></script>
+<script src='../smartclientRuntime/isomorphic/system/modules/ISC_Foundation.js'></script>
+<script src='../smartclientRuntime/isomorphic/system/modules/ISC_Containers.js'></script>
+<script src='../smartclientRuntime/isomorphic/system/modules/ISC_Grids.js'></script>
+<script src='../smartclientRuntime/isomorphic/system/modules/ISC_Forms.js'></script>
+<script src='../smartclientRuntime/isomorphic/system/modules/ISC_RichTextEditor.js'></script>
+<script src='../smartclientRuntime/isomorphic/system/modules/ISC_DataBinding.js'></script>
+<script src='../smartclientRuntime/isomorphic/skins/{$skin}/load_skin.js'></script>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
 <title>$title</title>
 </head>
 <body>
 <script>";
 $html = "";
-$content = '';
+// $content = '';
 // Shared files.
 //
+// $classes = array();
+// foreach($classes as $class) {
+// 	if(file_exists($shared_path . $class)){
+// 		$content .= file_get_contents($shared_path . $class);
+// 	}
+// }
+// echo $content;
+// Application files.
 $classes = array();
 $classes[] = "ClassDefaults.js";
 $classes[] = "library.js";
 $classes[] = "ShowInfo.js";
-foreach($classes as $class) {
-	if(file_exists($shared_path . $class)){
-		$content .= file_get_contents($shared_path . $class);
-	}
-}
-echo $content;
-// Application files.
-$classes = array();
-$classes[] = "BrewLog.js";
+// $classes[] = "BrewLog.js";
 $classes[] = "Cards.js";
 $classes[] = "Categories.js";
 $classes[] = "ContextMenu.js";

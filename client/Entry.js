@@ -16,7 +16,6 @@ isc.defineClass("Entry", "myWindow").addProperties({
 				},
 				{name: "taskDate",
 					dateDisplayFormat: "toJapanShortDate",
-					// editorType: "DateItem",
 					title: "Date",
 					// useTextField: true,
 					validators: [{type: "isDate"}],
