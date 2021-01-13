@@ -5,7 +5,7 @@ isc.defineClass("Entry", "myWindow").addProperties({
 		this.Super("initWidget", arguments);
 		this.EntryDS = isc.myDataSource.create({
 			allowAdvancedCriteria: false,
-			dataURL: serverPath + "Tasks.php",
+			dataURL: serverPath + "Task_ado.php",
 			parent: this,
 			fields:[
 				{name: "taskID",

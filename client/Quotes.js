@@ -4,7 +4,7 @@ isc.defineClass("Quotes", "myWindow").addProperties({
 		this.Super("initWidget", arguments);
 		this.QuotesDS = isc.myDataSource.create({
 			parent: this,
-			dataURL: serverPath + "Quotes.php",
+			dataURL: serverPath + "Quote_ado.php",
 			fields:[
 				{name: "quoteID", primaryKey: true, type: "sequence", canEdit: false, detail: true},
 				{name: "quote", type: "text", width: "*"},

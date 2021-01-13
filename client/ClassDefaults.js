@@ -24,8 +24,36 @@ isc.defineClass("myWindow", "Window").addProperties({
 isc.defineClass("myVLayout", "VLayout").addProperties({
 	height: "100%"
 });
-
 isc.defineClass("myDataSource", "DataSource").addProperties({
+	dataFormat: "json",
+	dataProtocol: "postParams",
+	transformRequest: function(dsRequest){
+		var superClassArguments = this.Super("transformRequest", dsRequest);
+		var newProperties = {operationType: dsRequest.operationType};
+		return isc.addProperties({}, superClassArguments, newProperties);
+	},
+	transformResponse: function(dsResponse, dsRequest, data){
+		var status = isc.RPCResponse.STATUS_SUCCESS;
+		var error = "";
+		var newResponse;
+
+		if(data.status){
+			status = data.status;
+		}
+		if(data.errorMessage){
+			error = data.errorMessage;
+		}
+		if(status === isc.RPCResponse.STATUS_SUCCESS){
+			newResponse = dsResponse;
+			isc.addProperties({}, newResponse, {willHandleError: true});
+		}else{
+			isc.warn(error, null, {title: "Server Error"});
+			newResponse = {status: status, willHandleError: true, data: error};
+		}
+		return this.Super("transformResponse", [newResponse, dsRequest, data]);
+	}
+});
+isc.defineClass("myDataSource2", "DataSource").addProperties({
 	autoFetchData: true,
 	dataFormat: "json",
 	dataProtocol: "postParams",

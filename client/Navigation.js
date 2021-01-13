@@ -27,10 +27,10 @@ isc.defineClass("Navigation", "Menu").addProperties({
 				{title: "Log Work", click: "isc.Work.create({width: 500, height: 600, top: 25, left: 5})"},
 				{title: "Task History", click: "isc.Tasks.create({width: 800, height: 600,  top: 5, left: 200, currUserID: isc.userData.userID})"},
 				{title: "Entry", click: "isc.Entry.create({width: 800, height: 600,  top: 5, left: 200, currUserID: isc.userData.userID})"},
-				{isSeparator: true},
-				{title: "Agile Cards", click: "isc.Cards.create({width: 800, height: 350, top: 1, left: 360})"},
+				// {isSeparator: true},
+				// {title: "Agile Cards", click: "isc.Cards.create({width: 800, height: 350, top: 1, left: 360})"},
 				{title: "To Do Items", click: "isc.Items.create({width: 800, height: 350, top: 1, left: 360})"},
-				{title: "Brew Log", click: "isc.BrewLog.create({width: \"95%\", height: \"50%\"})"},
+				// {title: "Brew Log", click: "isc.BrewLog.create({width: \"95%\", height: \"50%\"})"},
 				{isSeparator: true},
 				{title: "Reports", submenu: this.reportMenu},
 				{title: "Misc Tables", submenu: this.miscMenu}

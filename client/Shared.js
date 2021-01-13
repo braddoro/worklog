@@ -1,6 +1,6 @@
 isc.Shared = {
 	categoriesDS: isc.myDataSource.create({
-		dataURL: serverPath + "Categories.php",
+		dataURL: serverPath + "Category_ado.php",
 		fields:[
 			{name: "categoryID", primaryKey: true, type: "sequence", detail: true, canEdit: false, width: 75},
 			{name: "displayOrder", type: "integer", width: 100},
@@ -11,7 +11,7 @@ isc.Shared = {
 		]
 	}),
 	listDS: isc.myDataSource.create({
-		dataURL: serverPath + "Lists.php",
+		dataURL: serverPath + "List_ado.php",
 		fields:[
 			{name: "listID", primaryKey: true, type: "sequence", detail: true, canEdit: false, width: 75},
 			{name: "listName", type: "text", width: "*"},
@@ -21,19 +21,26 @@ isc.Shared = {
 	}),
 	projectsDS: isc.myDataSource.create({
 		allowAdvancedCriteria: false,
-		dataURL: serverPath + "Projects.php",
+		dataURL: serverPath + "Project_ado.php",
 		fields:[
 			{name: "projectID", type: "sequence", primaryKey: true, detail: true, canEdit: false, width: 75},
 			{name: "projectName", type: "text"},
 			{name: "projectCode", type: "text"},
 			{name: "ticketCode", type: "text", title: "Project Ticket"},
-			{name: "active", type: "text", width: 100, editorType: "selectItem", valueMap: {"Y": "Yes", "N": "No"}, width: 80},
+			{name: "active",
+				editorType: "selectItem",
+				type: "text",
+				valueMap: {"Y": "Yes", "N": "No"},
+				width: 100,
+				width: 80
+			},
 			{name: "lastChangeDate", width: 120, canEdit: false, detail: true}
 		]
 	}),
+
 	// defaultValue: "Y",
 	statusDS: isc.myDataSource.create({
-		dataURL: serverPath + "Statuses.php",
+		dataURL: serverPath + "Status_ado.php",
 		fields:[
 			{name: "statusID", primaryKey: true, type: "sequence", detail: true, canEdit: false, width: 75},
 			{name: "status", type: "text", width: "*"},
@@ -55,7 +62,7 @@ isc.Shared = {
 		]
 	}),
 	usersDS: isc.myDataSource.create({
-		dataURL: serverPath + "Users.php",
+		dataURL: serverPath + "User_ado.php",
 		fields:[
 			{name: "userID", primaryKey: true, type: "sequence", detail: true, canEdit: false, width: 75},
 			{name: "userName", type: "text", width: "*"},

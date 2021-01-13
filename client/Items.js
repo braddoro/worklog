@@ -5,7 +5,7 @@ isc.defineClass("Items", "myWindow").addProperties({
 	initWidget: function(initData){
 		this.Super("initWidget", arguments);
 		this.ItemsDS = isc.myDataSource.create({
-			dataURL: serverPath + "Items.php",
+			dataURL: serverPath + "Item_ado.php",
 			fields:[
 				{name: "itemID", primaryKey: true, type: "sequence", detail: true, canEdit: false},
 				{name: "userID",
@@ -22,16 +22,20 @@ isc.defineClass("Items", "myWindow").addProperties({
 				},
 				{name: "rank", type: "integer", width: 80, editorType: "spinner", defaultValue: 0},
 				{name: "projectID",
-					type: "integer",
-					optionDataSource: isc.Shared.projectsDS,
-					optionCriteria: {active: "Y"},
 					displayField: "projectName",
-					valueField: "projectID",
 					fetchMissingValues: true,
-					required: true,
-					pickListWidth: 250,
+					optionCriteria: {active: "Y"},
+					optionDataSource: isc.Shared.projectsDS,
+					pickListFields: [
+						{name: "projectCode", title: "Code", width: 75},
+						{name: "projectName", width: "*"},
+						{name: "active", width: "50"}
+						],
 					pickListProperties: {showFilterEditor: true},
-					pickListFields: [{name: "projectCode", width: 75}, {name: "projectName", width: "*"}],
+					pickListWidth: 250,
+					required: true,
+					type: "integer",
+					valueField: "projectID",
 					width: 150
 				},
 				{name: "statusID", type: "integer", optionDataSource: isc.Shared.statusDS, displayField: "status", valueField: "statusID", fetchMissingValues: true, required: true, width: 120},

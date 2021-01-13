@@ -5,14 +5,9 @@ isc.defineClass("Work", "myWindow").addProperties({
 	initWidget: function(initData){
 		this.Super("initWidget", arguments);
 		this.WorkDS = isc.myDataSource.create({
-			dataURL: serverPath + "Work.php",
+			dataURL: serverPath + "Task_ado.php",
 			fields:[
-				{name: "taskID",
-					canEdit: false,
-					primaryKey: true,
-					type: "sequence",
-					visible: false
-				},
+				{name: "taskID", canEdit: false, primaryKey: true, type: "sequence", visible: false},
 				{name: "taskDate",
 					editorType: "DateItem",
 					title: "Date",
@@ -50,9 +45,13 @@ isc.defineClass("Work", "myWindow").addProperties({
 					fetchMissingValues: true,
 					optionCriteria: {active: "Y"},
 					optionDataSource: isc.Shared.projectsDS,
-					pickListFields: [{name: "projectCode", width: 75}, {name: "projectName", width: "*"}, {name: "active", width: "75"}],
+					pickListFields: [
+						{name: "projectCode", title: "Code", width: 75},
+						{name: "projectName", width: "*"},
+						{name: "active", width: "50"}
+						],
 					pickListProperties: {showFilterEditor: true},
-					pickListWidth: 300,
+					pickListWidth: 350,
 					required: true,
 					title: "Project",
 					type: "integer",
@@ -66,19 +65,10 @@ isc.defineClass("Work", "myWindow").addProperties({
 			]
 		});
 		this.TasksDS = isc.myDataSource.create({
-			dataURL: serverPath + "Work.php",
+			dataURL: serverPath + "Task_ado.php",
 			fields:[
-				{name: "taskID",
-					canEdit: false,
-					detail: true,
-					primaryKey: true,
-					type: "sequence"
-				},
-				{name: "duration",
-					title: "Time",
-					type: "float",
-					width: 50
-				},
+				{name: "taskID", canEdit: false, detail: true, primaryKey: true, type: "sequence"},
+				{name: "duration", title: "Time", type: "float", width: 50},
 				{name: "taskCategoryID",
 					displayField: "categoryName",
 					fetchMissingValues: true,

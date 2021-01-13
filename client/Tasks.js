@@ -4,7 +4,7 @@ isc.defineClass("Tasks", "myWindow").addProperties({
 	initWidget: function(initData){
 		this.Super("initWidget", arguments);
 		this.TasksDS = isc.myDataSource.create({
-			dataURL: serverPath + "Tasks.php",
+			dataURL: serverPath + "Task_ado.php",
 			parent: this,
 			fields:[
 				{name: "taskID",
@@ -53,9 +53,12 @@ isc.defineClass("Tasks", "myWindow").addProperties({
 				{name: "projectID",
 					displayField: "projectName",
 					fetchMissingValues: true,
-					// optionCriteria: {active: "Y"},
 					optionDataSource: isc.Shared.projectsDS,
-					pickListFields: [{name: "projectCode", width: 75},{name: "projectName", width: "*"}],
+					pickListFields: [
+						{name: "projectCode", title: "Code", width: 75},
+						{name: "projectName", width: "*"},
+						{name: "active", width: "50"}
+						],
 					pickListProperties: {showFilterEditor: true},
 					pickListWidth: 250,
 					required: true,
